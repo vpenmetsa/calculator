@@ -1,0 +1,20 @@
+
+description = '<h3>Jtest calculator web project</h3><p>The project contains simple web application which can be used for gathering application coverage while running on web application server.</p>'
+
+apply plugin: 'war'
+apply plugin: 'maven'
+
+apply from: projectDir.absolutePath + '/../../integration/gradle/jtest.gradle'
+
+dependencies {
+   compile "javax.servlet:javax.servlet-api:3.0.1"
+}
+
+war {
+    baseName "Calculator"
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="calculator" default="war" xmlns:jtest="antlib:com.parasoft.jtest.plugin.ant">
+    
+    <description>Calculator</description>
+    
+    <property name="src.dir" value="src/main/java" />
+    <property name="resources.dir" value="src/main/webapp" />
+    <property name="target.dir" value="out" />
+    <property name="class.dir" value="${target.dir}/class" />
+    <property name="target.name" value="${target.dir}/Calculator.war" />
+    
+    <property name="jtest.home" value="${basedir}/../.." />
+    <taskdef uri="antlib:com.parasoft.jtest.plugin.ant"
+        resource="com/parasoft/jtest/plugin/ant/antlib.xml"
+        classpath="${jtest.home}/integration/ant/jtest-ant-plugin.jar"/>
+    <jtest:listener />
+
+    <target name="clean">
+        <delete dir="${target.dir}" failonerror="false" />
+        <delete dir="parasoft" failonerror="false" />
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${target.dir}" />
+        <mkdir dir="${class.dir}" />
+        <javac srcdir="${src.dir}" destdir="${class.dir}" fork="true" source="1.5" target="1.5" debug="true">
+            <classpath>
+                <fileset dir="lib">
+                    <include name="**/*.jar" />
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="war" depends="compile">
+        <war destfile="${target.name}" webxml="${resources.dir}/WEB-INF/web.xml">
+            <fileset dir="${resources.dir}">
+                <exclude name="WEB-INF"/>
+            </fileset>
+            <classes dir="${class.dir}"/>
+        </war>
+    </target>
+    
+    <target name="jtest-monitor" depends="compile">
+        <jtest:monitor/>
+    </target>
+
+</project>
