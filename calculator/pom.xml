@@ -54,12 +54,11 @@
 			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
-		     <dependency>
-    <groupId>org.mockito</groupId>
-    <artifactId>mockito-all</artifactId>
-    <version>1.9.5</version>
-    <scope>test</scope>
-</dependency>
+		<dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>2.8.47</version>
+    </dependency>
 	</dependencies>
 
 	<!-- Without below option, Maven shows a warning that the dependencies were 
